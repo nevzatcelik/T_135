@@ -1,6 +1,9 @@
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -8,6 +11,7 @@ import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class Day2_ArabamCom {
@@ -34,7 +38,7 @@ public class Day2_ArabamCom {
     }
 
     @Test
-    public void arabam1(){
+    public void arabam1() throws InterruptedException {
         // uygulamanin basarili bir sekilde yuklendigi dogrulanir
         Assert.assertTrue(androidDriver.isAppInstalled("com.dogan.arabam"));
         // uygulaminin basarili bir sekilde acildigi dogrulanir
@@ -42,13 +46,47 @@ Assert.assertTrue(androidDriver.findElementByXPath("//*[@text='Alırken, satarke
         // alt menuden ilan ara butonuna tiklanir
         androidDriver.findElementByXPath("//*[@text='İlan Ara']").click();
         // kategori olarak otomobil secilir
-
+        androidDriver.findElementByXPath("//*[@text='Otomobil']").click();
         // arac olarak Volkswagen secilir
+
+        Thread.sleep(1500);
+        TouchAction action=new TouchAction<>(androidDriver);
+
+        action.press(PointOption.point(538,1824)) // kullanici parmagini exrana koydu
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(100)))
+                // eger ekranda daha fazla mesafe gitmek istiyorsak belirtilen sureyi azaltmaliyiz
+                // eger ekranda daha az mesafe gitmek istiyorsak belirtilen sureyi arttirmaliyiz
+                // Ozetle bu sure mesafe arasinda bir ters orani MEVCUTTUR !!!!!!!!!
+                .moveTo(PointOption.point(538,564)) // kullanici ekran kaydirma islemini gerceklestirmek icin
+                                                                 // hedefe parmagini goturdu
+                .release() // kaydirma islemini tamamlamak icin ekrandan parmagini kaldirdir
+                .perform(); // gorevleri yerine getirmek icin perform emrini verdi
+
+        Thread.sleep(1000);
+        androidDriver.findElementByXPath("//*[@text='Volkswagen']").click();
         // arac markasi olarak passat secilir
+        androidDriver.findElementByXPath("//*[@text='Passat']").click();
         // 1.4 TSI BlueMotion secilir
+        androidDriver.findElementByXPath("//*[@text='1.4 TSi BlueMotion']").click();
         // Paket secimi yapilir
+        androidDriver.findElementByXPath("//*[@text='Comfortline']").click();
         // Ucuzdan pahaliya siralama yaparak filtreleme yapilir
+        Thread.sleep(1000);
+        action.press(PointOption.point(412,403))
+                .release()
+                .perform();
+        Thread.sleep(1000);
+
+        androidDriver.findElementByXPath("//*[@text='Fiyat - Ucuzdan Pahalıya']").click();
         // Gelen en ucuz aracin 500.000 tl den buyuk oldugu dogrulanir
+        String aracFiyati=androidDriver.findElementByXPath("(//*[@index='3'])[3]").getText();
+        aracFiyati=aracFiyati.replaceAll("\\D","");
+
+        //615000
+
+
+        Assert.assertTrue(Integer.parseInt(aracFiyati)>500000);
+
     }
 
     @Test
