@@ -14,8 +14,6 @@ public class KiwiApp {
          AndroidDriver<AndroidElement> driver=Driver.getAndroidDriver();
          KiwiPage page=new KiwiPage();
 
-
-
     @Test
     public void kiwiTest() throws InterruptedException {
         // uygulamanin yuklendigi dogrulanir
