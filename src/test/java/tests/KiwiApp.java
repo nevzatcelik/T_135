@@ -3,9 +3,7 @@ package tests;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
-import io.appium.java_client.touch.offset.PointOption;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.KiwiPage;
 import utils.ConfigReader;
@@ -34,7 +32,7 @@ public class KiwiApp {
             ReusableMethods.tiklamaMethodu(537,1695,1000);
             // 980,252
         }
-        Thread.sleep(2000);
+        Thread.sleep(3000);
 
 // Trip type,one way olarak secilir
        // page.returnButton.click();
@@ -44,17 +42,36 @@ public class KiwiApp {
         ReusableMethods.tiklamaMethodu(464,774,500);
         ReusableMethods.tiklamaMethodu(1019,139,500);
 // kalkis yapilacak ulke/sehir girilir ve sec e tiklanir
-        if (!driver.isKeyboardShown()){
+        if (driver.isKeyboardShown()){
             driver.getKeyboard().pressKey("istanbul");
         }
         else {
             page.kalkisEditText.sendKeys("Samsun");
         }
+        Thread.sleep(1000);
+        page.kalkisVarisSehriButton.click();
+        page.chooseButton.click();
+
 // varis ulkesi secenegine tiklanir ve gidilecek ulke girilir
+        ReusableMethods.tiklamaMethodu(376,921,500);
+        driver.getKeyboard().pressKey("London");
+        page.kalkisVarisSehriButton.click();
+        page.chooseButton.click();
 // gidis tarihi haziran ayinin 21 i olarak secilir ve set date e tiklanir
+        ReusableMethods.tiklamaMethodu(482,1052,1000);
+        ReusableMethods.tiklamaMethodu(541,1337,1000);
+        page.setDateButton.click();
 // search butonuna tiklanir
+        page.searchButton.click();
 // en  ucuz ve aktarmasiz filtrelemeleri yapilir
+        page.bestButton.click();
+        page.cheapestButton.click();
+        page.stopsButton.click();
+        page.nonStopsButton.click();
 // gelen bilet fiyati kaydedilir ve kullanicin telefonuna sms olarak gonderilir
+        Thread.sleep(3000);
+        String biletFiyati=page.enUcuzBiletFiyati.getText();
+        driver.sendSMS("555555555555","Kiwi uygulamasindan gelen en ucuz bilet fiyati = "+biletFiyati);
 
 
     }
