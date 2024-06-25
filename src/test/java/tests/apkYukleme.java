@@ -24,7 +24,7 @@ public class apkYukleme {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "11.0");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\ahmet\\IdeaProjects\\T_135_Appium\\Apps\\all-currency-converter-3-9-0 (1).apk");
+        capabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\ahmet\\IdeaProjects\\T_135_Appium\\Apps\\Apk Bilgisi_2.3.4_apkcombo.com.apk");
         // Eger bir uygulama ilk defa yukleniyor ise bu capability kullanilir ve uygulama yuklenir.
         // Uygulama yuklu ise bunun yuklu olup olmadigini kontrol eder yukluyse uygulamayi acar degilse uygulamayi yukler ve acar
         /* Eger andorid bir cihaz da test yapacaksak bununla alakali bir automationName belirlememiz gerekiyor

@@ -1,4 +1,4 @@
-package tests;
+package tests.day1;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
